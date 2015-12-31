@@ -88,22 +88,4 @@ public class CipherMethods {
         return result;
     }
 
-    protected void arraySwap(int[] S, int i, int j) {
-        int temp = S[i];
-        S[i] = S[j];
-        S[j] = temp;
-    }
-
-    protected int[] permutateArray(int[] original, int[] permutate, int[] temp) {
-        int b;
-
-        for (int i = 0; i < permutate.length; i++) {
-
-            b = permutate[i];
-            temp[i + 1] = original[b];
-        }
-        original = temp;
-        return original;
-    }
-
 }
