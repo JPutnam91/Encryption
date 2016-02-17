@@ -1,7 +1,16 @@
-package com.company;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package RC4Cipher;
+
+
+
 
 /**
- * Created by scott_000 on 1/8/2016.
+ *
+ * @author Jeff
  */
 public class CipherMethods {
 
@@ -32,9 +41,9 @@ public class CipherMethods {
     protected String hexToAscii(String hex) {
 
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < hex.length(); i+=2) {
-            String str = hex.substring(i, i+2);
-            result.append((char)Integer.parseInt(str, 16));
+        for (int i = 0; i < hex.length(); i += 2) {
+            String str = hex.substring(i, i + 2);
+            result.append((char) Integer.parseInt(str, 16));
         }
 
 
@@ -44,9 +53,9 @@ public class CipherMethods {
     protected String binaryToAscii(String binary) {
 
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < binary.length(); i+=8) {
-            String str = binary.substring(i, i+8);
-            result.append((char)Integer.parseInt(str, 2));
+        for (int i = 0; i < binary.length(); i += 8) {
+            String str = binary.substring(i, i + 8);
+            result.append((char) Integer.parseInt(str, 2));
         }
 
 
