@@ -14,7 +14,7 @@ import java.io.FileNotFoundException;
 public class AES extends CipherMethods {
     private AESKeyGen keyGen;
     private int[][] keySBox;
-    private int[][] invKeySBox = new int[][]{
+    private int[][] invKeySBox = new int[][]{//inverse sBox
             {0x52, 0x09, 0x6A, 0xD5, 0x30, 0x36, 0xA5, 0x38, 0xBF, 0x40, 0xA3, 0x9E, 0x81, 0xF3, 0xD7, 0xFB},
             {0x7C, 0xE3, 0x39, 0x82, 0x9B, 0x2F, 0xFF, 0x87, 0x34, 0x8E, 0x43, 0x44, 0xC4, 0xDE, 0xE9, 0xCB},
             {0x54, 0x7B, 0x94, 0x32, 0xA6, 0xC2, 0x23, 0x3D, 0xEE, 0x4C, 0x95, 0x0B, 0x42, 0xFA, 0xC3, 0x4E},
@@ -32,6 +32,7 @@ public class AES extends CipherMethods {
             {0xA0, 0xE0, 0x3B, 0x4D, 0xAE, 0x2A, 0xF5, 0xB0, 0xC8, 0xEB, 0xBB, 0x3C, 0x83, 0x53, 0x99, 0x61},
             {0x17, 0x2B, 0x04, 0x7E, 0xBA, 0x77, 0xD6, 0x26, 0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D}
     };
+    //Multiplication boxes
     private int[] multBox_2 = new int[]{0x00, 0x02, 0x04, 0x06, 0x08, 0x0a, 0x0c, 0x0e, 0x10, 0x12, 0x14, 0x16, 0x18, 0x1a, 0x1c, 0x1e,
             0x20, 0x22, 0x24, 0x26, 0x28, 0x2a, 0x2c, 0x2e, 0x30, 0x32, 0x34, 0x36, 0x38, 0x3a, 0x3c, 0x3e,
             0x40, 0x42, 0x44, 0x46, 0x48, 0x4a, 0x4c, 0x4e, 0x50, 0x52, 0x54, 0x56, 0x58, 0x5a, 0x5c, 0x5e,
@@ -193,18 +194,18 @@ public class AES extends CipherMethods {
         String result = "";
 
         createMessageArray(message); //Fills messageArray
-        currentKey = AESKeys[10]; //Sets currentKey to initial key used in round key generation
+        currentKey = AESKeys[10]; //Sets currentKey to last key used in round key generation
         addRoundKey();
         for (int a = 9; a > 0; a--) {
             //loop
-            currentKey = AESKeys[a]; //loops though AESKeys up to next to last key.
+            currentKey = AESKeys[a]; //loops though AESKeys backwards.
             invShiftRows();
             invSubBytes();
             addRoundKey();
             invMixColumns();
             //end loop
         }
-        currentKey = AESKeys[0]; //sets currentKey to last round key of 10
+        currentKey = AESKeys[0]; //sets currentKey to the initial key
         invShiftRows();
         invSubBytes();
         addRoundKey();
@@ -382,25 +383,25 @@ public class AES extends CipherMethods {
         for (int a = 0; a < messageArray.length; a = a + 4) {//re-orders values in groups of 4
             b = a / 4;//integer that represents the amount of places the value should move up in the array, increases from 0-3 for every 4th number
             c = a + b;//represents the index the value will be moved to.
-            if (c > a + 3) {//if c is less than a adds 4 to c (if c = -1 and a is 0 c = 3 and value is moved to the last index of the group of 4 indexes being modified)
+            if (c > a + 3) {//if c is greater than a+3 put value in first index of the set of 4
                 c = c - 4;
             }
             temp[c] = messageArray[a];
 
             c = (a + 1) + b;
-            if (c > a + 3) {//if c is less than a adds 4 to c (if c = -1 and a is 0 c = 3 and value is moved to the last index of the group of 4 indexes being modified)
+            if (c > a + 3) {//if c is greater than a+3 put value in first index of the set of 4
                 c = c - 4;
             }
             temp[c] = messageArray[a + 1];
 
             c = (a + 2) + b;
-            if (c > a + 3) {//if c is less than a adds 4 to c (if c = -1 and a is 0 c = 3 and value is moved to the last index of the group of 4 indexes being modified)
+            if (c > a + 3) {//if c is greater than a+3 put value in first index of the set of 4
                 c = c - 4;
             }
             temp[c] = messageArray[a + 2];
 
             c = (a + 3) + b;
-            if (c > a + 3) {//if c is less than a adds 4 to c (if c = -1 and a is 0 c = 3 and value is moved to the last index of the group of 4 indexes being modified)
+            if (c > a + 3) {//if c is greater than a+3 put value in first index of the set of 4
                 c = c - 4;
             }
             temp[c] = messageArray[a + 3];
