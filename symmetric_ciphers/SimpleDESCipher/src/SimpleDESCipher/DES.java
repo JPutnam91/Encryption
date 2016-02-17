@@ -93,7 +93,7 @@ public class DES extends CipherMethods {
     //********************************************************************
     //  Begins initial permutation.
     //********************************************************************
-    public String beginEncrypt() throws FileNotFoundException {
+    public String beginEncrypt() throws FileNotFoundException {//encrypts given string and returns a hex string
         int b = 0;
         int[] keyArray64 = new int[]{58, 50, 42, 34, 26, 18, 10, 2, 60, 52, 44, 36, 28, 20, 12, 4, 62, 54,
             46, 38, 30, 22, 14, 6, 64, 56, 48, 40, 32, 24, 16, 8, 57, 49, 41, 33, 25, 17, 9, 1, 59, 51, 43,
@@ -112,7 +112,7 @@ public class DES extends CipherMethods {
     }
     
     
-    public String beginDecrypt() throws FileNotFoundException {
+    public String beginDecrypt() throws FileNotFoundException {//decrypts given hex string and returns a string
         int b = 0;
         int[] keyArray64 = new int[]{58, 50, 42, 34, 26, 18, 10, 2, 60, 52, 44, 36, 28, 20, 12, 4, 62, 54,
             46, 38, 30, 22, 14, 6, 64, 56, 48, 40, 32, 24, 16, 8, 57, 49, 41, 33, 25, 17, 9, 1, 59, 51, 43,
