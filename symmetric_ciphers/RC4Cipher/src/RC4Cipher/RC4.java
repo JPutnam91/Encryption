@@ -17,7 +17,7 @@ public class RC4 extends CipherMethods {
     private String key;
     private int[] K;
 
-    public RC4(String key, String message) {
+    public RC4(String key, String message) {//constructor sets up data
         this.key = key;
         this.message = message;
         K = new int[key.length()];
@@ -30,7 +30,7 @@ public class RC4 extends CipherMethods {
 
     }
 
-    private void genSbox() {
+    private void genSbox() {//generates the sBox
         int j = 0;
         int temp;
         int keyLength = key.length();
